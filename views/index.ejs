@@ -1,13 +1,26 @@
-<html lang="en">
+<html lang="en"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    Index Page
+    <h1 id="userId"></h1>
+    <h1 id="userId2"></h1>
+    <h1 id="userId3"></h1>
+    <div id="waitingMessage" class="flex w-full justify-center text-center justify-items-center">
+        <h1>Waiting For Player 2..... </h1>
+    </div>
+
+    <div id="boardChess">
+        <div class="boardMain w-full flex items-center justify-center h-screen bg-zinc-900">
+            <div class="chessboard w-96 h-96 bg-red-400"></div>
+    </div>
+    </div>
 </body>
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/index.js"></script>
-
 </html>

@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "chess": "^1.2.2",
+    "chess.com": "file:",
     "chess.js": "^1.0.0-beta.8",
     "ejs": "^3.1.10",
     "express": "^4.19.2",

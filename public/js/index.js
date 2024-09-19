@@ -1,5 +1,4 @@
 const socket = io();
-
 const chess = new Chess();
 const boardElement = document.querySelector(".chessboard");
 const boardChess = document.getElementById("boardChess");
@@ -92,24 +91,27 @@ const getPieceUnicode = (piece) => {
     }
     return unicodePieces[piece.type] || "";
 };
-socket.on('waiting', (data) => {   
-    boardChess.style.display = 'none';
-    waitingMessage.style.display = 'block';
-    userId.innerHTML=`user id : ${socket.id}`;
-    userId2.innerHTML=`user role : ${playerRole}`;
-});
-socket.on('chat-start', (data) => {   
-    userId.innerHTML=`user id : ${socket.id}`;
-    boardChess.style.display = 'block';
-    waitingMessage.style.display = 'none';
-    userId2.innerHTML=`user role : ${playerRole}`;
-    userId3.innerHTML=`user id : ${data}`;
-});
-
 
 socket.on("playerRole",function(role){
     playerRole = role;
     renderBoard();
+});
+socket.on('waiting', (data) => {   
+    boardChess.style.display = 'none';
+    waitingMessage.style.display = 'block';
+    // userId.innerHTML=`user Name : ${name}`;
+    userId2.innerHTML=`user id : ${socket.id}`;
+    userId3.innerHTML=`user role : ${playerRole}`;
+});
+socket.on('chat-start', (data) => {   
+    // const PlayerName = prompt("Enter your name");
+    // socket.Name = PlayerName;
+    userId.innerHTML=`user id2 : ${socket.id}`;
+    boardChess.style.display = 'block';
+    waitingMessage.style.display = 'none';
+    // userId.innerHTML=`user name : ${name}`;
+    userId2.innerHTML=`user role2 : ${playerRole}`;
+    userId3.innerHTML=`user room2 : ${data}`;
 });
 socket.on("spectatorRole",function(){
     console.log("SPec");

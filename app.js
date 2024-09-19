@@ -81,13 +81,17 @@ io.on("connection",function(uniquesocket){
     }
 
     uniquesocket.on("disconnect",()=>{
-        // console.log(`waiting user: ${waitingUser.id}`);
+        if(waitingUser && uniquesocket.id==waitingUser.id ){
+            waitingUser=null;
+        }
+        else{
         const roomName = uniquesocket.roomName;
         // if white player leave the match....
         if(uniquesocket.id===rooms[roomName].players.white){
             // goes to waiting state
             io.to(rooms[roomName].players.black).emit('waiting',rooms[roomName].players.black);
             //if no waitinguser 
+
             if(!waitingUser){
                 io.to(rooms[roomName].players.black).emit('playerRole','w');
                 rooms[roomName].players.white = rooms[roomName].players.black;
@@ -131,11 +135,12 @@ io.on("connection",function(uniquesocket){
                 // console.log(rooms[roomName2]);
                 // waitingUser=null;
             }
-            
+            else{
+                waitingUser=null;
+            }
             // waitingUser=null;
             
         } 
-
 
         //if black player leaves
         else if(uniquesocket.id===rooms[roomName].players.black){
@@ -147,7 +152,7 @@ io.on("connection",function(uniquesocket){
             }
 
             // //if not waiting user
-            else{
+            else if(waitingUser){
                 const roomName2 = waitingUser.roomName;
                 const leftSocketId = rooms[roomName].players.white;
                 const left = io.sockets.sockets.get(leftSocketId);
@@ -176,7 +181,15 @@ io.on("connection",function(uniquesocket){
                 // waitingUser=null;
                 
             }
+            else{
+                waitingUser=null;
+            }
         }
+
+
+        else{
+            waitingUser=null;
+        }}
 
         console.log(`user disconnected ${uniquesocket.id} and ${uniquesocket.roomName}`);
     })
